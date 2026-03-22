@@ -1,12 +1,10 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "npm run build",
   "installCommand": "npm install",
-  "outputDirectory": "dist",
   "framework": null,
   "regions": ["iad1"],
   "functions": {
-    "dist/api/**/*.js": {
+    "api/**/*.ts": {
       "runtime": "@vercel/node@3.2.0",
       "memory": 512,
       "maxDuration": 10
