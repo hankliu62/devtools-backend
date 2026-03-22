@@ -5,7 +5,6 @@
   "installCommand": "npm install",
   "framework": null,
   "regions": ["iad1"],
-  "nodeVersion": "22",
   "functions": {
     "api/**/*.ts": {
       "runtime": "@vercel/node@3.2.0",
