@@ -4,7 +4,7 @@
   "description": "通用工具 API 服务 - 部署到 Vercel",
   "main": "api/index.js",
   "scripts": {
-    "build": "tsc"
+    "dev": "vercel dev"
   },
   "dependencies": {
     "@vercel/node": "^3.2.0"
