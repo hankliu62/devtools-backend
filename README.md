@@ -66,17 +66,46 @@ npx vercel --prod
 
 当代码推送到 `master` 分支时，会自动部署到 Vercel 生产环境。
 
-#### 1. 配置 GitHub Secrets
+#### 1. 获取 Vercel 凭证
 
-在 GitHub 仓库 **Settings → Secrets and variables → Actions** 中添加以下 Secret：
+**Step 1.1: 获取 Vercel Token**
 
-| Secret 名称 | 获取方式 |
-|------------|---------|
-| `VERCEL_TOKEN` | [vercel.com/account/tokens](https://vercel.com/account/tokens) 创建 Personal Access Token |
-| `VERCEL_ORG_ID` | 运行 `vercel projects ls` 查看，或在 Vercel 项目设置中获取 |
-| `VERCEL_PROJECT_ID` | 同上，在 Vercel 项目设置中获取 |
+1. 访问 [vercel.com/account/tokens](https://vercel.com/account/tokens)
+2. 点击 **Create** 创建新 Token
+3. 输入 Token 名称（如 `github-actions`）
+4. 点击 **Generate**
+5. 复制生成的 Token
 
-#### 2. 配置 Vercel 环境变量
+**Step 1.2: 获取 ORG_ID 和 PROJECT_ID**
+
+在终端运行以下命令（需先登录 Vercel）：
+
+```bash
+vercel login          # 如果未登录
+vercel projects ls    # 查看项目列表
+```
+
+输出示例：
+```
+> Fetched 1 project(s). Ready!
+>
+> abc12345    hankliu/devtools-backend [org_xxxxxx]
+```
+
+- `abc12345` → `VERCEL_PROJECT_ID`
+- `org_xxxxxx` → `VERCEL_ORG_ID`
+
+#### 2. 配置 GitHub Secrets
+
+在 GitHub 仓库 **Settings → Secrets and variables → Actions** 中点击 **New repository secret**，添加以下 3 个 Secret：
+
+| Secret 名称 | 获取方式 | 示例值 |
+|------------|---------|--------|
+| `VERCEL_TOKEN` | [vercel.com/account/tokens](https://vercel.com/account/tokens) | `xxxxxxxxxxxxx` |
+| `VERCEL_ORG_ID` | `vercel projects ls` 查看 | `org_xxxxxxxx` |
+| `VERCEL_PROJECT_ID` | 同上 | `prj_xxxxxxxx` |
+
+#### 3. 配置 Vercel 环境变量
 
 在 Vercel 项目 **Settings → Environment Variables** 中添加：
 
@@ -85,14 +114,14 @@ npx vercel --prod
 | `MXNZP_APP_ID` | 墨尼哲 API App ID（[申请地址](https://www.mxnzp.com/)） |
 | `MXNZP_APP_SECRET` | 墨尼哲 API App Secret |
 
-#### 3. 部署流程
+#### 4. 部署流程
 
 | 触发条件 | 部署目标 |
 |---------|---------|
 | Push 到 `master` | **生产环境** |
 | 创建 PR | **预览环境** + PR 评论预览链接 |
 
-#### 4. 部署区域配置
+#### 5. 部署区域配置
 
 如需更改部署区域，修改 `vercel.json` 中的 `regions`：
 
