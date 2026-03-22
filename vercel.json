@@ -1,5 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "echo 'No build required'",
   "installCommand": "npm install",
   "framework": null,
   "regions": ["iad1"],
